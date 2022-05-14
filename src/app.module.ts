@@ -10,6 +10,10 @@ import { MenucategoryModule } from './menucategory/menucategory.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { RolesModule } from './roles/roles.module';
 import { Menucategory } from './menucategory/entities/menucategory.entity';
+import { User } from './users/entities/user.entity';
+import { Role } from './roles/entities/role.entity';
+import { MenuhistoryModule } from './menuhistory/menuhistory.module';
+import { Menuhistory } from './menuhistory/entities/menuhistory.entity';
 
 
 @Module({
@@ -20,9 +24,9 @@ import { Menucategory } from './menucategory/entities/menucategory.entity';
     username: 'root',
     password: '',
     database: 'db_foodrand',
-    entities: [Menu, Menucategory],
+    entities: [Menu, Menucategory, User, Role, Menuhistory],
     synchronize: true,
-  }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule],
+  }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule, MenuhistoryModule],
   controllers: [AppController],
   providers: [AppService],
 })

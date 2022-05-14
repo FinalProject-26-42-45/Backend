@@ -12,8 +12,8 @@ export class MenuController {
   @Get()
   async findAll() {
       return await this.menuService.findAll()
-
   }
+  
   @Get(":MenuId")
   async findOne(@Param() MenuId: number) {
       return await this.menuService.findOne(MenuId)
