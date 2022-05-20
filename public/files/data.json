@@ -1,0 +1,12 @@
+{
+     "MenuId": 219,
+     "MenuName": "1212312121",
+     "MenuImg": "gen.jpg",
+     "Calories": "300.00",
+     "Preparation": "1. ต้มน้ำซุปกระดูกหมูให้ร้อน",
+     "menucategory": 
+      {
+        "CategoryId": 1,
+        "CategoryName": "อาหารไทย"
+      } 
+}

@@ -1,5 +1,5 @@
-import { User } from "src/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Users from "src/entities/users.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Roles')
 export class Role {
@@ -9,10 +9,6 @@ export class Role {
     @Column()
     RoleName: string;
 
-    // @ManyToOne(()=> User, users => users.roles, {onDelete: 'CASCADE', eager: true})
-    // @JoinColumn({name:"RoleId"})
-    // users: User;
-
-    @OneToMany(()=> User, users => users.roles)
-    users: User
+    @OneToMany(()=> Users, users => users.roles)
+    users: Users[];
 }

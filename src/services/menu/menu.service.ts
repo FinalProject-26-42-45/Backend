@@ -33,8 +33,10 @@ export class MenuService {
     
     const catemenu = {
       MenuId: data.MenuId,
-      CategoryId: data.CategoryId
+      CategoryId: data.menucategory.CategoryId
     }
+    console.log(catemenu);
+    
     this.cateservice.create(catemenu)
   }
 

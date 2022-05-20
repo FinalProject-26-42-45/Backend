@@ -1,5 +1,5 @@
-import { User } from "src/entities/user.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Users from "src/entities/users.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('MenuHistory')
 export class Menuhistory {
@@ -9,6 +9,9 @@ export class Menuhistory {
     @Column()
     MenuName: string;
 
-    @OneToMany(()=> User, users => users.menuhistory)
-    users: User
+    @Column()
+    UserId: number;
+    @ManyToOne(()=> Users, users => users.menuhistory, {onDelete: 'CASCADE', eager: true})
+    @JoinColumn({name:"UserId"})
+    users: Users;
 }

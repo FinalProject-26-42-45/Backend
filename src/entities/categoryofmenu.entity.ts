@@ -5,17 +5,22 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, Primar
 @Entity('CategoryOfMenu')
 export class Categoryofmenu {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    CateOfMenuId: number
+    
+    @Column()
+    MenuId: number
+    @ManyToOne(()=> Menu, (menu) => menu.categoryofmenu, {eager: true})
+    @JoinColumn({name:"MenuId"})
+    menu: Menu;
+    
+    @Column()
     CategoryId: number
-    @ManyToOne(()=> Menucategory, (menucategory) => menucategory.categoryofmenu, {primary: true})
+    @ManyToOne(()=> Menucategory, (menucategory) => menucategory.categoryofmenu, {eager: true})
     @JoinColumn({name:"CategoryId"})
     menucategory: Menucategory;
 
-    @PrimaryColumn()
-    MenuId: number
-    @ManyToOne(()=> Menu, (menu) => menu.categoryofmenu, {primary: true})
-    @JoinColumn({name:"MenuId"})
-    menu: Menu;
+
 
     // @OneToMany(()=> Menu, (menu) => menu.categoryofmenu)
     // menu: Menu[];

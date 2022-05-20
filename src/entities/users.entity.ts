@@ -3,7 +3,7 @@ import { Role } from "src/entities/role.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Users')
-export class User {
+export default class Users {
     @PrimaryGeneratedColumn()
     UserId: number;
 
@@ -37,12 +37,13 @@ export class User {
     @Column()
     Religion: string;
 
-    @ManyToOne(()=> Menuhistory, menuhistory => menuhistory.users, {onDelete: 'CASCADE', eager: true})
-    @JoinColumn({name:"UserId"})
-    menuhistory: Menuhistory;
-
-    @ManyToOne(()=> Role, roles => roles, {onDelete: 'CASCADE', eager: true})
+    @Column()
+    RoleId: number;
+    @ManyToOne(()=> Role, roles => roles.users, {onDelete: 'CASCADE', eager: true})
     @JoinColumn({name:"RoleId"})
     roles: Role;
+
+    @OneToMany(()=> Menuhistory, menuhistory => menuhistory.users)
+    menuhistory: Menuhistory[];
 
 }

@@ -13,6 +13,7 @@ import { CommonMudule } from './modules/common.module';
 import { CategoryofmenuModule } from './modules/categoryofmenu.module';
 
 
+
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
@@ -21,8 +22,8 @@ import { CategoryofmenuModule } from './modules/categoryofmenu.module';
     username: 'root',
     password: '',
     database: 'db_foodrand',
-    entities: ['dist/*/entities/**.js'],
-    synchronize: true,
+    entities: ['dist/entities/*.js'],
+    synchronize: false,
   }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule],
   controllers: [AppController],
   providers: [AppService],
