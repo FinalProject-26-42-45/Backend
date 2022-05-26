@@ -64,7 +64,7 @@ export class MenuService {
   }
 
   async remove(MenuId: number){
-    const img = this.findImg(MenuId)
+    const img = await this.findImg(MenuId)
     fs.unlinkSync(`./images/${img}`)
     this.menuRepository.delete(MenuId);
   }

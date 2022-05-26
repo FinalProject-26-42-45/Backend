@@ -18,7 +18,7 @@ export class Menu {
     @Column()
     Preparation: string;
 
-    @OneToMany(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menu)
+    @OneToMany(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menu, {onDelete: 'CASCADE'})
     categoryofmenu: Categoryofmenu[];
 
     // @ManyToOne(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menu)
