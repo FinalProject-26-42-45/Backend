@@ -27,7 +27,7 @@ export class MenuService {
       MenuName: data.MenuName,
       MenuImg: data.MenuImg,
       Calories: data.Calories,
-      Preparation: data.Preparation
+      Preparation: data.Preparation,
     }
     this.menuRepository.save(menuObj)
     
