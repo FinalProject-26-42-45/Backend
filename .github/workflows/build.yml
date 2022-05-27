@@ -6,28 +6,21 @@ on:
 
 jobs:
   build:
-    run-on: ubantu-latest
+    runs-on: ubuntu-latest
     steps:
-    - uses: action/checkout@v2
+    - uses: actions/checkout@v2
     - name: Login to Github Container Registry
       uses: docker/login-action@v1
       with: 
         registry: ghcr.io
         username: ${{ github.actor}}
         password: ${{ secrets.GITHUB_TOKEN}}
-    - name: create .env
-      run: |
-        touch .env
-        echo DATABASE_URL=${{ secrets.DATABASE }} >> .env
-        echo ACCESS_TOKEN_SECRET=${{ secret.ACCESS_TOKEN_SECRET }} >> .env
-        ls -a
-        mkdir tmp
 
     - name: build docker image
       run: |
         docker build . --tag ghcr.io/finalproject-26-42-45/backend
         docker images
-    - name: push docker iamges to registry
+    - name: push docker images to registry
       run: |
         docker push ghcr.io/finalproject-26-42-45/backend
         

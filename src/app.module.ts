@@ -14,13 +14,29 @@ import { CategoryofmenuModule } from './modules/categoryofmenu.module';
 
 
 
+// @Module({
+//   imports: [TypeOrmModule.forRoot({
+//     type: 'mysql',
+//     host: 'localhost',
+//     port: 3306,
+//     username: 'root',
+//     password: '',
+//     database: 'db_foodrand',
+//     entities: ['dist/entities/*.js'],
+//     synchronize: false,
+//   }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule],
+//   controllers: [AppController],
+//   providers: [AppService],
+// })
+// export class AppModule {}
+
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'localhost',
+    host: 'database',
     port: 3306,
-    username: 'root',
-    password: '',
+    username: 'backendfoodrand',
+    password: 'foodrandproject',
     database: 'db_foodrand',
     entities: ['dist/entities/*.js'],
     synchronize: false,
