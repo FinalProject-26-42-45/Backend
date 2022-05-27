@@ -48,6 +48,13 @@ export class MenuController {
       return this.menuService.editMenu()
     }
 
+  // @Put(":MenuId")
+  // @UseInterceptors(
+  //   FileFieldsInterceptor([{name: 'json', maxCount: 1}], upload))
+  //   editMenu(@Param() MenuId: number){
+  //     return this.menuService.editMenu(MenuId)
+  //   } 
+
   @Delete(":MenuId")
   async delete(@Param() req: any) {
       return this.menuService.remove(req.MenuId)
