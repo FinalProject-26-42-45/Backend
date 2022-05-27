@@ -20,7 +20,7 @@ jobs:
       run: |
         docker build . --tag ghcr.io/finalproject-26-42-45/backend
         docker images
-    - name: push docker iamges to registry
+    - name: push docker images to registry
       run: |
         docker push ghcr.io/finalproject-26-42-45/backend
         
