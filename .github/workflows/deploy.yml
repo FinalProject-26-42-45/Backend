@@ -16,7 +16,9 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor}}
         password: ${{ secrets.GITHUB_TOKEN}}
-
+    - name: create folder
+      run: |
+        mkdir public/files
     - name: build docker image
       run: |
         docker build . --tag ghcr.io/finalproject-26-42-45/backend
