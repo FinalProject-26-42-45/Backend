@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    run-on: ubantu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: action/checkout@v2
     - name: Login to Github Container Registry
