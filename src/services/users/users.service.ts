@@ -49,7 +49,7 @@ export class UsersService {
 
   async createUser(userDto: CreateUserDto): Promise<UserDto> {
     const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId } = userDto;
+      Tel, FoodAllergens, Religion, RoleId=2 } = userDto;
     
     // check if the user exists in the DB
     const userDB = await this.userRepository.findOne({ where: { Username }});
