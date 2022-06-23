@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/
 import { RolesService } from '../../services/roles/roles.service';
 import { CreateRoleDto } from '../../dto/roles/create-role.dto';
 import { UpdateRoleDto } from '../../dto/roles/update-role.dto';
-import { Role } from '../../entities/role.entity';
+import { Roles } from '../../entities/role.entity';
 
 @Controller('roles')
 export class RolesController {
@@ -19,12 +19,12 @@ export class RolesController {
   }
 
   @Post()
-  async create(@Body() createUserDto: Role) {
+  async create(@Body() createUserDto: Roles) {
     return await this.rolesService.create(createUserDto);
   }
 
   @Put(":RoleId")
-  async update(@Param() RoleId: number, @Body() createUserDto: Role) {
+  async update(@Param() RoleId: number, @Body() createUserDto: Roles) {
     return this.rolesService.update(RoleId, createUserDto);
   }
 

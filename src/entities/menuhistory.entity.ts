@@ -1,4 +1,4 @@
-import Users from "src/entities/users.entity";
+import { Users } from 'src/entities/users.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('MenuHistory')

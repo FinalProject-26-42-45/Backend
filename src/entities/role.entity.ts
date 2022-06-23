@@ -1,9 +1,9 @@
-import Users from "src/entities/users.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Users } from 'src/entities/users.entity';
+import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Roles')
-export class Role {
-    @PrimaryGeneratedColumn()
+export class Roles {
+    @PrimaryColumn()
     RoleId: number;
 
     @Column()

@@ -22,17 +22,10 @@ export class MenuController {
     return this.menuService.getImage(req.MenuId)
   }
 
-  // @Get("img/:MenuId")
-  // async getImg(@Param() req: any, @Res() res: any){
-  //   const imgname = this.menuService.findImg(req.MenuId)
-  //   res.sendFile(imgname, { root: './images'})
-  // }
-
   @Get(":MenuId")
   async findOne(@Param() MenuId: number) {
       return await this.menuService.findOne(MenuId)
   }
-
 
   @Post()
   @UseInterceptors(
@@ -47,13 +40,6 @@ export class MenuController {
     editMenu(){
       return this.menuService.editMenu()
     }
-
-  // @Put(":MenuId")
-  // @UseInterceptors(
-  //   FileFieldsInterceptor([{name: 'json', maxCount: 1}], upload))
-  //   editMenu(@Param() MenuId: number){
-  //     return this.menuService.editMenu(MenuId)
-  //   } 
 
   @Delete(":MenuId")
   async delete(@Param() req: any) {
