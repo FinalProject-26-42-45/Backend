@@ -28,6 +28,22 @@ async register(UserDto: CreateUserDto): Promise<RegistrationStatus> {
     return status;
 }
 
+async registerAdmin(UserDto: CreateUserDto): Promise<RegistrationStatus> {
+    let status: RegistrationStatus = {
+        success: true,
+        message: 'user registered',
+    };
+    try {  
+        await this.usersService.createAdmin(UserDto);
+    } catch (err) {
+        status = {
+            success: false,
+            message: err,
+        };
+    }
+    return status;
+}
+
 async login(loginUserDto: LoginUserDto){
     
     //find user in DB

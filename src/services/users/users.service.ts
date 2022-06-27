@@ -33,7 +33,6 @@ export class UsersService {
     }
 
     //compare passwords
-    //const ps = await comparePasswords(user.Password, Password);
     await bcrypt.compare(Password, user.Password, err => {
       if (err) {
         throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
@@ -63,24 +62,21 @@ export class UsersService {
     return toUserDto(user);
   }
 
+  async createAdmin(userDto: CreateUserDto): Promise<UserDto> {
+    const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
+      Tel, FoodAllergens, Religion, RoleId=1 } = userDto;
+    
+    // check if the user exists in the DB
+    const userDB = await this.userRepository.findOne({ where: { Username }});
+    if (userDB) {
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+    }
 
-  // create(users: Users): Promise<Users> {
-  //   return this.userRepository.save(users);
-  // }
+    const user: Users = await this.userRepository.create({ Username, Password, Firstname, Lastname, DOB, Gender, Email,
+      Tel, FoodAllergens, Religion, RoleId });
+    await this.userRepository.save(user);
+    return toUserDto(user);
+  }
 
-  // findAll(): Promise<Users[]> {
-  //   return this.userRepository.find();
-  // }
 
-  // findOne(UserId: number) {
-  //   return this.userRepository.findOne(UserId);
-  // }
-
-  // async update(UserId: number, users: Users) {
-  //   await this.userRepository.update(UserId, users)
-  // }
-
-  // async remove(UserId: number): Promise<void> {
-  //   await this.userRepository.delete(UserId);
-  // }
 }

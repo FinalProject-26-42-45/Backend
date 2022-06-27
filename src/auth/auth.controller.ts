@@ -24,4 +24,20 @@ public async login(@Body() loginUserDto: LoginUserDto) {
     return await this.authService.login(loginUserDto);
 }
 
+@Post('admin/register')
+public async registerAdmin(@Body() createUserDto: CreateUserDto, ): Promise<RegistrationStatus> {
+    console.log(createUserDto)
+    const result:
+    RegistrationStatus = await this.authService.registerAdmin(createUserDto);
+    if (!result.success) {
+        throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+    }
+    return result;
+}
+
+@Post('admin/login')
+public async loginAdmin(@Body() loginUserDto: LoginUserDto) {
+    return await this.authService.login(loginUserDto);
+}
+
 }
