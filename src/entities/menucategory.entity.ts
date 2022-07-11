@@ -13,7 +13,4 @@ export class Menucategory {
     @OneToMany(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menucategory)
     categoryofmenu: Categoryofmenu[]
 
-    // @ManyToOne(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menucategory)
-    // @JoinColumn({name:"CategoryId"})
-    // categoryofmenu: Categoryofmenu;
 }

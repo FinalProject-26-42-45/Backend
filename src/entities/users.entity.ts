@@ -1,9 +1,10 @@
 import { Menuhistory } from "src/entities/menuhistory.entity";
-import { Role } from "src/entities/role.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Roles } from "src/entities/role.entity";
+import { BaseEntity, BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import * as bcrypt from 'bcrypt';
 
 @Entity('Users')
-export default class Users {
+export class Users extends BaseEntity{
     @PrimaryGeneratedColumn()
     UserId: number;
 
@@ -39,11 +40,14 @@ export default class Users {
 
     @Column()
     RoleId: number;
-    @ManyToOne(()=> Role, roles => roles.users, {onDelete: 'CASCADE', eager: true})
+    @ManyToOne(()=> Roles, roles => roles.users, {eager: true, createForeignKeyConstraints: false})
     @JoinColumn({name:"RoleId"})
-    roles: Role;
+    roles: Roles;
 
     @OneToMany(()=> Menuhistory, menuhistory => menuhistory.users)
     menuhistory: Menuhistory[];
 
+    @BeforeInsert() async hashPassword(){
+        this.Password = await bcrypt.hash(this.Password, 10);
+    }
 }

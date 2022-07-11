@@ -1,1 +1,1 @@
-export class CreateIngredientDto {}
+export class CreateIngredientsDto {}

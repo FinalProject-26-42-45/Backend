@@ -5,6 +5,7 @@ import { upload } from 'src/services/common/common.service';
 
 
 
+
 @Controller('menu')
 export class MenuController {
 
@@ -21,17 +22,10 @@ export class MenuController {
     return this.menuService.getImage(req.MenuId)
   }
 
-  // @Get("img/:MenuId")
-  // async getImg(@Param() req: any, @Res() res: any){
-  //   const imgname = this.menuService.findImg(req.MenuId)
-  //   res.sendFile(imgname, { root: './images'})
-  // }
-
   @Get(":MenuId")
   async findOne(@Param() MenuId: number) {
       return await this.menuService.findOne(MenuId)
   }
-
 
   @Post()
   @UseInterceptors(

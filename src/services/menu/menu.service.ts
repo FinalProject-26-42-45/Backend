@@ -27,7 +27,7 @@ export class MenuService {
       MenuName: data.MenuName,
       MenuImg: data.MenuImg,
       Calories: data.Calories,
-      Preparation: data.Preparation
+      Preparation: data.Preparation,
     }
     this.menuRepository.save(menuObj)
 
@@ -64,6 +64,21 @@ export class MenuService {
     }
     this.menuRepository.save(newdata)
   }
+
+  // async editMenu(MenuId: number) {
+  //   const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
+  //   const result = await this.menuRepository.find({where: {MenuId: data.MenuId }})
+  //   console.log(result);
+    
+  //   const newdata = {
+  //     MenuId: result[0].MenuId,
+  //     MenuName: data.MenuName,
+  //     MenuImg: result[0].MenuImg,
+  //     Calories: data.Calories,
+  //     Preparation: data.Preparation
+  //   }
+  //   this.menuRepository.save(newdata)
+  // }
 
   async remove(MenuId: number){
     const img = await this.findImg(MenuId)
