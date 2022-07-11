@@ -37,6 +37,7 @@ export class MenuController {
   @UseInterceptors(
     FileFieldsInterceptor([{name: 'file', maxCount: 1}, {name: 'json', maxCount: 1}], upload))
     addMenu(){
+      console.log('test');
       return this.menuService.addMenu()
     }
 

@@ -30,9 +30,11 @@ export class MenuService {
       Preparation: data.Preparation
     }
     this.menuRepository.save(menuObj)
+
+    const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
     
     const catemenu = {
-      MenuId: data.MenuId,
+      MenuId: lid[0].MenuId,
       CategoryId: data.menucategory.CategoryId
     }
     console.log(catemenu);
@@ -64,7 +66,7 @@ export class MenuService {
   }
 
   async remove(MenuId: number){
-    const img = this.findImg(MenuId)
+    const img = await this.findImg(MenuId)
     fs.unlinkSync(`./images/${img}`)
     this.menuRepository.delete(MenuId);
   }

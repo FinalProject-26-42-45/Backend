@@ -10,7 +10,7 @@ export class Categoryofmenu {
     
     @Column()
     MenuId: number
-    @ManyToOne(()=> Menu, (menu) => menu.categoryofmenu, {eager: true})
+    @ManyToOne(()=> Menu, (menu) => menu.categoryofmenu, {eager: true, onDelete: 'CASCADE', onUpdate: 'NO ACTION'})
     @JoinColumn({name:"MenuId"})
     menu: Menu;
     
