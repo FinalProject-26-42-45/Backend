@@ -48,6 +48,6 @@ export class Users extends BaseEntity{
     menuhistory: Menuhistory[];
 
     @BeforeInsert() async hashPassword(){
-        this.Password = await bcrypt.hash(this.Password, 10);
+        this.Password = await bcrypt.hash(this.Password, await bcrypt.genSalt(10));
     }
 }
