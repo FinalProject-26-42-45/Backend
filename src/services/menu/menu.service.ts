@@ -81,4 +81,13 @@ export class MenuService {
     const image = await this.findImg(MenuId)
     return `localhost:3000/${image}`
   }
+
+  async getMenubyCategory(CategoryId: number){
+    return await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId = ${CategoryId}`)
+  }
+
+  async getIngredientsbyMenu(MenuId: number){
+    return await this.menuRepository.query(`select * from Menu m join Recipe r on m.MenuId = r.MenuId join Ingredients i on i.IngredientId = r.IngredientId
+                                            where m.MenuId = ${MenuId}`)
+  }
 }

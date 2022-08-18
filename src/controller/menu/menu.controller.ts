@@ -22,6 +22,17 @@ export class MenuController {
     return this.menuService.getImage(req.MenuId)
   }
 
+  @Get("category/:CategoryId")
+  async getMenu(@Param() req: any){
+    console.log(req);
+    return this.menuService.getMenubyCategory(req.CategoryId)
+  }
+
+  @Get("ingredient/:MenuId")
+  async getIngredients(@Param() req: any){
+    return this.menuService.getIngredientsbyMenu(req.MenuId)
+  }
+
   @Get(":MenuId")
   async findOne(@Param() MenuId: number) {
       return await this.menuService.findOne(MenuId)
@@ -45,4 +56,6 @@ export class MenuController {
   async delete(@Param() req: any) {
       return this.menuService.remove(req.MenuId)
   }
+
+
 }

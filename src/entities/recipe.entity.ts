@@ -9,9 +9,9 @@ export class Recipe {
     RecipeId: number
 
     @Column()
-    IngerdientId: number;
+    IngredientId: number;
     @ManyToOne(()=> Ingredients, ingredients => ingredients.recipe)
-    @JoinColumn({name:"IngerdientId"})
+    @JoinColumn({name:"IngredientId"})
     ingredients: Ingredients;
 
     @Column()
