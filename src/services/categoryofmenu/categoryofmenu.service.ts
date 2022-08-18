@@ -14,4 +14,8 @@ export class CategoryofmenuService {
   create(com: CreateCategoryofmenuDto) {
     this.Repository.save(com)
   }
+
+  // findMenuId(CateId: number){
+  //   this.Repository.find({ where: {CategoryId: CateId}})
+  // }
 }

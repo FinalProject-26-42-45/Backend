@@ -65,24 +65,10 @@ export class MenuService {
     this.menuRepository.save(newdata)
   }
 
-  // async editMenu(MenuId: number) {
-  //   const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
-  //   const result = await this.menuRepository.find({where: {MenuId: data.MenuId }})
-  //   console.log(result);
-    
-  //   const newdata = {
-  //     MenuId: result[0].MenuId,
-  //     MenuName: data.MenuName,
-  //     MenuImg: result[0].MenuImg,
-  //     Calories: data.Calories,
-  //     Preparation: data.Preparation
-  //   }
-  //   this.menuRepository.save(newdata)
-  // }
 
   async remove(MenuId: number){
-    const img = await this.findImg(MenuId)
-    fs.unlinkSync(`./images/${img}`)
+    // const img = await this.findImg(MenuId)
+    // fs.unlinkSync(`./images/${img}`)
     this.menuRepository.delete(MenuId);
   }
 
@@ -94,5 +80,14 @@ export class MenuService {
   async getImage(MenuId: number){
     const image = await this.findImg(MenuId)
     return `localhost:3000/${image}`
+  }
+
+  async getMenubyCategory(CategoryId: number){
+    return await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId = ${CategoryId}`)
+  }
+
+  async getIngredientsbyMenu(MenuId: number){
+    return await this.menuRepository.query(`select * from Menu m join Recipe r on m.MenuId = r.MenuId join Ingredients i on i.IngredientId = r.IngredientId
+                                            where m.MenuId = ${MenuId}`)
   }
 }
