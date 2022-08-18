@@ -47,8 +47,8 @@ export class UsersService {
   }
 
   async createUser(userDto: CreateUserDto): Promise<UserDto> {
-    const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId=2 } = userDto;
+    const {  Firstname, Lastname, Email,
+      Tel, DOB, Gender, Username, Password, FoodAllergens, Religion, RoleId=2 } = userDto;
     
     // check if the user exists in the DB
     const userDB = await this.userRepository.findOne({ where: { Username }});

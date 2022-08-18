@@ -20,6 +20,7 @@ async register(UserDto: CreateUserDto): Promise<RegistrationStatus> {
     try {  
         await this.usersService.createUser(UserDto);
     } catch (err) {
+        console.log(err);
         status = {
             success: false,
             message: err,
