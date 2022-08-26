@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getImgName } from 'src/services/common/common.service';
 import { Repository } from 'typeorm';
@@ -23,6 +23,10 @@ export class MenuService {
     data.MenuImg = imgName
     console.log(data);
 
+    const mname = await this.menuRepository.findOne({ where: { MenuName: data.MenuName }});
+    if (mname){
+      throw new HttpException('Menuname already exist!', HttpStatus.CONFLICT)
+    } else {
     const menuObj = {
       MenuName: data.MenuName,
       MenuImg: data.MenuImg,
@@ -30,6 +34,7 @@ export class MenuService {
       Preparation: data.Preparation,
     }
     this.menuRepository.save(menuObj)
+  }
 
     const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
     

@@ -57,8 +57,8 @@ async login(loginUserDto: LoginUserDto){
     };
 }
 
-private createToken({ Username }: UserDto): any {
-    const user: JwtPayload = { Username };
+private createToken({ UserId, Username }: UserDto): any {
+    const user: JwtPayload = { UserId, Username };
     const accessToken = this.jwtService.sign(user);
     return {
         expiresIn: process.env.EXPIRESIN,

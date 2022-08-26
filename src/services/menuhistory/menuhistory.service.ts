@@ -12,23 +12,8 @@ export class MenuhistoryService {
     private menuhistoryRepository: Repository<Menuhistory>,
   ) { }
 
-  create(menuhistory: Menuhistory): Promise<Menuhistory> {
-    return this.menuhistoryRepository.save(menuhistory);
+  async addHistory(UserId: number, MenuName: string){
+    this.menuhistoryRepository.save({UserId: UserId, MenuName: MenuName})
   }
 
-  findAll(): Promise<Menuhistory[]> {
-    return this.menuhistoryRepository.find();
-  }
-
-  findOne(HistoryId: number) {
-    return this.menuhistoryRepository.findOne(HistoryId);
-  }
-
-  async update(HistoryId: number, menuhistory: Menuhistory) {
-    await this.menuhistoryRepository.update(HistoryId, menuhistory)
-  }
-
-  async remove(HistoryId: number): Promise<void> {
-    await this.menuhistoryRepository.delete(HistoryId);
-  }
 }
