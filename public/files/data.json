@@ -1,1 +1,8 @@
-{"MenuName":"vvv","Calories":120,"Preparation":"aaaaaaaa","menucategory":{"CategoryId":7,"CategoryName":"ของหวาน"}}
+{
+     "MenuId": 215,
+     "MenuName": "1212312121",
+     "MenuImg": "gen.jpg",
+     "Calories": "300.00",
+     "Preparation": "1. ต้มน้ำซุปกระดูกหมูให้ร้อน",
+     "Ingredients": "suan"
+}

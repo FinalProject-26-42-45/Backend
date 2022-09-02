@@ -38,7 +38,7 @@ public async registerAdmin(@Body() createUserDto: CreateUserDto, ): Promise<Regi
 
 @Post('admin/login')
 public async loginAdmin(@Body() loginUserDto: LoginUserDto) {
-    return await this.authService.login(loginUserDto);
+    return await this.authService.login(loginUserDto, "Admin");
 }
 
 }
