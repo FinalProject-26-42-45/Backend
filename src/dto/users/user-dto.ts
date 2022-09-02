@@ -12,5 +12,6 @@ export class UserDto {
     @IsNotEmpty()  Tel: string;
     @IsNotEmpty()  FoodAllergens: string;
     @IsNotEmpty()  Religion: string;
+    @IsNotEmpty()  RoleId: number;
 
 }

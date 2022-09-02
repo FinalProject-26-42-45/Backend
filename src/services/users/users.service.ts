@@ -15,13 +15,13 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private userRepository: Repository<Users>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Users[]> {
     return this.userRepository.find();
   }
 
-  async findOne(options?: object): Promise<UserDto>{
+  async findOne(options?: object): Promise<UserDto> {
     const user = await this.userRepository.findOne(options);
     return toUserDto(user);
   }
@@ -43,39 +43,44 @@ export class UsersService {
   }
 
   async findByPayload({ Username }: any): Promise<UserDto> {
-    return await this.findOne({ where: { Username }});
+    return await this.findOne({ where: { Username } });
   }
 
   async createUser(userDto: CreateUserDto): Promise<UserDto> {
     const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId=2 } = userDto;
-    
+      Tel, FoodAllergens, Religion, RoleId = 2 } = userDto;
+
     // check if the user exists in the DB
-    const userDB = await this.userRepository.findOne({ where: { Username }});
+    const userDB = await this.userRepository.findOne({ where: { Username } });
     if (userDB) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+    } else {
+      const user: Users = await this.userRepository.create({
+        Username, Password, Firstname, Lastname, DOB, Gender, Email,
+        Tel, FoodAllergens, Religion, RoleId
+      });
+      await this.userRepository.save(user);
+      return toUserDto(user);
     }
-
-    const user: Users = await this.userRepository.create({ Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId });
-    await this.userRepository.save(user);
-    return toUserDto(user);
   }
 
   async createAdmin(userDto: CreateUserDto): Promise<UserDto> {
     const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId=1 } = userDto;
-    
+      Tel, FoodAllergens, Religion, RoleId = 1 } = userDto;
+
     // check if the user exists in the DB
-    const userDB = await this.userRepository.findOne({ where: { Username }});
+    const userDB = await this.userRepository.findOne({ where: { Username } });
     if (userDB) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+    } else {
+      const user: Users = await this.userRepository.create({
+        Username, Password, Firstname, Lastname, DOB, Gender, Email,
+        Tel, FoodAllergens, Religion, RoleId
+      });
+      await this.userRepository.save(user);
+      return toUserDto(user);
     }
 
-    const user: Users = await this.userRepository.create({ Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId });
-    await this.userRepository.save(user);
-    return toUserDto(user);
   }
 
 

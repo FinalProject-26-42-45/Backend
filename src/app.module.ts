@@ -3,10 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users.module';
-import { IngredientsModule } from './modules/ingredients.module';
 import { MenuModule } from './modules/menu.module';
 import { MenucategoryModule } from './modules/menucategory.module';
-import { RecipeModule } from './modules/recipe.module';
 import { RolesModule } from './modules/roles.module';
 import { MenuhistoryModule } from './modules/menuhistory.module';
 import { CommonMudule } from './modules/common.module';
@@ -28,7 +26,7 @@ import { AuthModule } from './auth/auth.module';
     database: 'db_foodrand',
     entities: ['dist/entities/*.js'],
     synchronize: false,
-  }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
+  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

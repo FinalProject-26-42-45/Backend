@@ -32,6 +32,7 @@ export class MenuService {
       MenuImg: data.MenuImg,
       Calories: data.Calories,
       Preparation: data.Preparation,
+      Ingredients: data.Ingredients
     }
     this.menuRepository.save(menuObj)
   }
@@ -65,7 +66,8 @@ export class MenuService {
       MenuName: data.MenuName,
       MenuImg: result[0].MenuImg,
       Calories: data.Calories,
-      Preparation: data.Preparation
+      Preparation: data.Preparation,
+      Ingredients: data.Ingredients
     }
     this.menuRepository.save(newdata)
   }
