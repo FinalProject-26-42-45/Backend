@@ -4,6 +4,7 @@ import { CreateUserDto } from 'src/dto/users/create-user.dto';
 import { LoginUserDto } from 'src/dto/users/login-user-dto';
 import { UserDto } from 'src/dto/users/user-dto';
 import { UsersService } from 'src/services/users/users.service';
+import { RelationQueryBuilder } from 'typeorm';
 import { JwtPayload } from './jwt.strategy';
 
 @Injectable()
@@ -58,7 +59,7 @@ export class AuthService {
         const token = this.createToken(user);
 
         return {
-            Username: user.Username, ...token,
+            Username: user.Username, RoleId: user.RoleId, ...token,
         };
     }
 
