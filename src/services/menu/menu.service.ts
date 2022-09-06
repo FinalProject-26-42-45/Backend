@@ -41,7 +41,7 @@ export class MenuService {
     
     const catemenu = {
       MenuId: lid[0].MenuId,
-      CategoryId: data.menucategory.CategoryId
+      CategoryId: data.menucategory.CategoryId //ลบ .cateid ออก
     }
     console.log(catemenu);
     

@@ -1,8 +1,1 @@
-{
-     "MenuId": 215,
-     "MenuName": "1212312121",
-     "MenuImg": "gen.jpg",
-     "Calories": "300.00",
-     "Preparation": "1. ต้มน้ำซุปกระดูกหมูให้ร้อน",
-     "Ingredients": "suan"
-}
+{"MenuName":"ฟฟ","Calories":1234,"Preparation":"ฟฟฟฟฟฟฟฟฟฟฟ","Ingredients":"ฟฟฟฟฟฟฟฟ","menucategory":[{"CategoryId":4,"CategoryName":"อาหารใต้"},{"CategoryId":17,"CategoryName":"ยำ"},{"CategoryId":9,"CategoryName":"ซีฟู้ด"}]}

@@ -12,7 +12,7 @@ export class CategoryofmenuService {
   ) { }
 
   create(com: CreateCategoryofmenuDto) {
-    this.Repository.save(com)
+    this.Repository.save(com) //ก่อน save ต้อง loop เช็คว่า cate มากี่อัน แล้วค่อย save แต่ละอัน
   }
 
   // findMenuId(CateId: number){
