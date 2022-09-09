@@ -11,7 +11,19 @@ export class CategoryofmenuService {
     private Repository: Repository<Categoryofmenu>,
   ) { }
 
-  create(com: CreateCategoryofmenuDto) {
-    this.Repository.save(com)
+  create(com: any) {
+    for (let cate in com.Category) {
+      const obj = {
+        MenuId: com.MenuId,
+        CategoryId: com.Category[cate].CategoryId
+      }
+      this.Repository.save(obj)
+
+    }
+
   }
+
+  // findMenuId(CateId: number){
+  //   this.Repository.find({ where: {CategoryId: CateId}})
+  // }
 }

@@ -1,5 +1,7 @@
 import { Categoryofmenu } from "src/entities/categoryofmenu.entity"
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Randomstatistic } from "./randomstatistic.entity";
+
 
 @Entity('Menu')
 export class Menu {
@@ -18,11 +20,15 @@ export class Menu {
     @Column()
     Preparation: string;
 
+    @Column()
+    Ingredients: string;
+
     @OneToMany(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menu, {onDelete: 'CASCADE'})
     categoryofmenu: Categoryofmenu[];
 
-    // @ManyToOne(()=> Categoryofmenu, (categoryofmenu) => categoryofmenu.menu)
-    // @JoinColumn({name:"MenuId"})
-    // categoryofmenu: Categoryofmenu;
+    @OneToMany(()=> Randomstatistic, (randomstatistic) => randomstatistic.menu, {onDelete: 'CASCADE'})
+    randomstatistic: Randomstatistic[];
+
+
 
 }

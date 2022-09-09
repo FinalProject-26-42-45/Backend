@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getImgName } from 'src/services/common/common.service';
 import { Repository } from 'typeorm';
@@ -21,25 +21,31 @@ export class MenuService {
     
     const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8')) 
     data.MenuImg = imgName
-    console.log(data);
+    //console.log(data);
 
+    const mname = await this.menuRepository.findOne({ where: { MenuName: data.MenuName }});
+    if (mname){
+      throw new HttpException('Menuname already exist!', HttpStatus.CONFLICT)
+    } else {
     const menuObj = {
       MenuName: data.MenuName,
       MenuImg: data.MenuImg,
       Calories: data.Calories,
       Preparation: data.Preparation,
+      Ingredients: data.Ingredients
     }
-    this.menuRepository.save(menuObj)
+    await this.menuRepository.save(menuObj)
+  
 
     const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
-    
-    const catemenu = {
+
+    const catemenu:any = {
       MenuId: lid[0].MenuId,
-      CategoryId: data.menucategory.CategoryId
+      Category: data.menucategory
     }
-    console.log(catemenu);
     
     this.cateservice.create(catemenu)
+  }
   }
 
   findAll(): Promise<Menu[]> {
@@ -60,29 +66,16 @@ export class MenuService {
       MenuName: data.MenuName,
       MenuImg: result[0].MenuImg,
       Calories: data.Calories,
-      Preparation: data.Preparation
+      Preparation: data.Preparation,
+      Ingredients: data.Ingredients
     }
     this.menuRepository.save(newdata)
   }
 
-  // async editMenu(MenuId: number) {
-  //   const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
-  //   const result = await this.menuRepository.find({where: {MenuId: data.MenuId }})
-  //   console.log(result);
-    
-  //   const newdata = {
-  //     MenuId: result[0].MenuId,
-  //     MenuName: data.MenuName,
-  //     MenuImg: result[0].MenuImg,
-  //     Calories: data.Calories,
-  //     Preparation: data.Preparation
-  //   }
-  //   this.menuRepository.save(newdata)
-  // }
 
   async remove(MenuId: number){
-    const img = await this.findImg(MenuId)
-    fs.unlinkSync(`./images/${img}`)
+    // const img = await this.findImg(MenuId)
+    // fs.unlinkSync(`./images/${img}`)
     this.menuRepository.delete(MenuId);
   }
 
@@ -94,5 +87,14 @@ export class MenuService {
   async getImage(MenuId: number){
     const image = await this.findImg(MenuId)
     return `localhost:3000/${image}`
+  }
+
+  async getMenubyCategory(CategoryId: number){
+    return await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId = ${CategoryId}`)
+  }
+
+  async getIngredientsbyMenu(MenuId: number){
+    return await this.menuRepository.query(`select * from Menu m join Recipe r on m.MenuId = r.MenuId join Ingredients i on i.IngredientId = r.IngredientId
+                                            where m.MenuId = ${MenuId}`)
   }
 }
