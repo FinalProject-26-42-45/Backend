@@ -16,34 +16,34 @@ import { AuthModule } from './auth/auth.module';
 
 
 
-@Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'db_foodrand',
-    entities: ['dist/entities/*.js'],
-    synchronize: false,
-  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
-
 // @Module({
 //   imports: [TypeOrmModule.forRoot({
 //     type: 'mysql',
-//     host: 'database',
+//     host: 'localhost',
 //     port: 3306,
-//     username: 'backendfoodrand',
-//     password: 'foodrandproject',
+//     username: 'root',
+//     password: '',
 //     database: 'db_foodrand',
 //     entities: ['dist/entities/*.js'],
 //     synchronize: false,
-//   }), UsersModule, IngredientsModule, MenuModule, MenucategoryModule, RecipeModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule],
+//   }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
 //   controllers: [AppController],
 //   providers: [AppService],
 // })
 // export class AppModule {}
+
+@Module({
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'database',
+    port: 3306,
+    username: 'backendfoodrand',
+    password: 'foodrandproject',
+    database: 'db_foodrand',
+    entities: ['dist/entities/*.js'],
+    synchronize: false,
+  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
