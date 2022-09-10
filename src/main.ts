@@ -8,7 +8,7 @@ async function bootstrap() {
     origin: ['http://localhost:8080', 'https://foodrand.hopto.org'],
     methods: ['POST', 'PUT', 'GET', 'DELETE']
   })
-  app.use(express.static('images'))
+  app.use('/images', express.static(join(__dirname, '..', 'images')));
   await app.listen(3000);
   //Demo DevOPs
 }
