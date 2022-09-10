@@ -42,7 +42,7 @@ import { AuthModule } from './auth/auth.module';
     database: 'db_foodrand',
     entities: ['dist/entities/*.js'],
     synchronize: false,
-  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule],
+  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
