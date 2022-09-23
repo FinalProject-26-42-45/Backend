@@ -33,13 +33,14 @@ export class UsersService {
     }
 
     //compare passwords
-    await bcrypt.compare(Password, user.Password, err => {
-      if (err) {
-        throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
-      }
-    })
-
-    return toUserDto(user);
+    const isValid = await bcrypt.compare(Password, user.Password)
+    // console.log(test);
+    if(isValid){
+      return toUserDto(user);
+    }
+    throw new HttpException('Password not wrong.', HttpStatus.UNAUTHORIZED);
+  
+   
   }
 
   async findByPayload({ Username }: any): Promise<UserDto> {
