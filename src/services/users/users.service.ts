@@ -7,7 +7,7 @@ import { Users } from 'src/entities/users.entity';
 import { toUserDto } from 'src/mapper/mapper';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-
+import * as fs from 'fs';
 
 
 @Injectable()
@@ -19,6 +19,10 @@ export class UsersService {
 
   findAll(): Promise<Users[]> {
     return this.userRepository.find();
+  }
+
+  findUser(UserId: number) {
+    return this.userRepository.findOne(UserId);
   }
 
   async findOne(options?: object): Promise<UserDto> {
@@ -82,6 +86,23 @@ export class UsersService {
       return toUserDto(user);
     }
 
+  }
+
+  async editUser() {
+    const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
+    const result = await this.userRepository.find({where: {UserId: data.UserId }})
+    //console.log(result);
+    
+    const newdata = {
+      UserId: result[0].UserId,
+      Firstname: data.Firstname,
+      Lastname: data.Lastname,
+      Gender: data.Gender,
+      Tel: data.Tel,
+      FoodAllergens: data.FoodAllergens,
+      Religion: data.Religion,
+    }
+    this.userRepository.save(newdata)
   }
 
 

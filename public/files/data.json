@@ -1,1 +1,9 @@
-{"MenuName":"เครปร้อน","Calories":200,"Preparation":"aaaaaaaaaaaaa","Ingredients":"aaaaaaaaa","menucategory":[{"CategoryId":7,"CategoryName":"ของหวาน"},{"CategoryId":10,"CategoryName":"อาหารตามสั่ง"},{"CategoryId":11,"CategoryName":"สตรีทฟู้ด"}]}
+{
+     "UserId": 9,
+     "Firstname": "natti",
+     "Lastname": "mah",
+     "Gender": "male",
+     "Tel": "0925868618",
+     "FoodAllergens": "puk",
+     "Religion": "Christ"
+}
