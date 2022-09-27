@@ -21,7 +21,7 @@ export class MenuService {
     
     const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8')) 
     data.MenuImg = imgName
-    console.log(data);
+    //console.log(data);
 
     const mname = await this.menuRepository.findOne({ where: { MenuName: data.MenuName }});
     if (mname){
@@ -34,18 +34,18 @@ export class MenuService {
       Preparation: data.Preparation,
       Ingredients: data.Ingredients
     }
-    this.menuRepository.save(menuObj)
-  }
+    await this.menuRepository.save(menuObj)
+  
 
     const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
-    
-    const catemenu = {
+
+    const catemenu:any = {
       MenuId: lid[0].MenuId,
-      CategoryId: data.menucategory.CategoryId //ลบ .cateid ออก
+      Category: data.menucategory
     }
-    console.log(catemenu);
     
     this.cateservice.create(catemenu)
+  }
   }
 
   findAll(): Promise<Menu[]> {
