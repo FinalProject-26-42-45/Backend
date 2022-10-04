@@ -7,9 +7,10 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class MenuhistoryController {
   constructor(private menuhistoryService: MenuhistoryService) {}
 
-  @Get(":UserId")
-  async find(@Param() UserId: number) {
-    return await this.menuhistoryService.findHistory(UserId)
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  async find(@Request() request: any) {
+    return await this.menuhistoryService.findHistory(request.user.UserId)
   }
   @UseGuards(JwtAuthGuard)
   @Post()
