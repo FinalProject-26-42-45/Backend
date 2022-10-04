@@ -14,6 +14,10 @@ export class MenuhistoryService {
     return this.menuhistoryRepository.find();
   }
 
+  findHistory(UserId: number) {
+    return this.menuhistoryRepository.find({where: {UserId: UserId }})
+  }
+
   async addHistory(UserId: number, MenuName: string){
     this.menuhistoryRepository.save({UserId: UserId, MenuName: MenuName})
   }
