@@ -14,4 +14,7 @@ export class Menuhistory {
     @ManyToOne(()=> Users, users => users.menuhistory, {onDelete: 'CASCADE', eager: true})
     @JoinColumn({name:"UserId"})
     users: Users;
+
+    @Column()
+    HistoryCount: number;
 }

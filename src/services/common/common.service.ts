@@ -1,9 +1,13 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { diskStorage } from 'multer'
+import { Cron, CronExpression, SchedulerRegistry } from "@nestjs/schedule";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Randomstatistics } from "src/entities/randomstatistics.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class CommonService{
-    
+
 }
 
 var imgName = ''

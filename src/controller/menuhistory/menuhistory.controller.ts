@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Request } from '@nestjs/common';
 import { MenuhistoryService } from '../../services/menuhistory/menuhistory.service';
-import { Menuhistory } from '../../entities/menuhistory.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('menuhistory')
