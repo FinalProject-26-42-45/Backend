@@ -1,9 +1,1 @@
-{
-     "UserId": 9,
-     "Firstname": "natti",
-     "Lastname": "mah",
-     "Gender": "male",
-     "Tel": "0925868618",
-     "FoodAllergens": "puk",
-     "Religion": "Christ"
-}
+{"UserId":2,"Firstname":"niraphorn","Lastname":"jongkraijak","Gender":"หญิง","Tel":"1234567889","Religion":"พุทธ","FoodAllergens":"ไข่, นม"}

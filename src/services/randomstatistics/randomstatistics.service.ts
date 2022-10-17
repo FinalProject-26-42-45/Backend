@@ -28,6 +28,7 @@ export class RandomstatisticsService {
           const data = {
             RandomId: each.RandomId,
             MenuName: each.menu.MenuName,
+            MenuImg: each.menu.MenuImg,
             RandomCount: each.RandomCount
           }
           result.push(data)
