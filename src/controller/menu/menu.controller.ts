@@ -37,7 +37,7 @@ export class MenuController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get("categorylist")
+  @Post("categorylist")
   async getCategotyList(@Body() req: getMenubyCategoryIdListDto, @Request() request: any) {
     return this.menuService.getMenubyCategoryList(req.CategoryIdList, request.user.UserId)
   }
