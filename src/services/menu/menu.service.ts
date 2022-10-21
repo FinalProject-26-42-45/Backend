@@ -105,23 +105,27 @@ export class MenuService {
   }
 
   async getMenubyCategoryList(CategoryId: number[], UserId: number) {
+    
     const user = await this.userservice.findUser(UserId)
+    
     const aller = user.FoodAllergens
     const dislike = user.DislikedFood
 
     const merge = aller.concat(dislike)
 
-    let menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)
+    var menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)
     if (merge) {
-      merge.filter((el, index, arr) => {
+      
+      merge.filter((el, index) => {
         for (const each of menu) {
           if (each.Ingredients.includes(el)) {
+ 
             menu.splice(index, 1)
           }
         }
       })
     }
-
+    
     if (user.Religion == 'อิสลาม') {
       menu = menu.filter((el: any) => !el.Ingredients.includes("หมู"))
     }

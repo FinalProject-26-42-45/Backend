@@ -22,3 +22,10 @@ export class CreateUserDto {
      RoleId: number;
 
 }
+export class editUserDto {
+     Firstname: string
+     Lastname: string
+     Religion: string
+     FoodAllergens: any
+     DislikedFood: any
+}

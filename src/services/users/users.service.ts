@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from 'src/dto/users/create-user.dto';
+import { CreateUserDto, editUserDto } from 'src/dto/users/create-user.dto';
 import { LoginUserDto } from 'src/dto/users/login-user-dto';
 import { UserDto } from 'src/dto/users/user-dto';
 import { Users } from 'src/entities/users.entity';
@@ -31,7 +31,6 @@ export class UsersService {
       FoodAllergens: user.FoodAllergens.split(","),
       DislikedFood: user.DislikedFood.split(",")
     }
-      console.log(data)
       return data;
     }
 
@@ -104,10 +103,8 @@ export class UsersService {
 
   }
 
-  async editUser() {
-    const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
-    const result = await this.userRepository.find({where: {UserId: data.UserId }})
-    //console.log(result);
+  async editUser(UserId: number, data: editUserDto) {
+    const result = await this.userRepository.find({where: {UserId: UserId}})
     
     const newdata = {
       UserId: result[0].UserId,

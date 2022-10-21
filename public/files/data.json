@@ -1,8 +1,1 @@
-{
-    "UserId": 1,
-    "Firstname": "jam",
-    "Lastname": "maha",
-    "Religion": "พุทธ",
-    "FoodAllergens": ["ไข่", "ไก่"],
-    "DislikedFood": ["ขิง","ตะไคร้"]
-}
+{"UserId":null,"Firstname":"aa","Lastname":"aa","Religion":"พุทธ","FoodAllergens":["ไข่","ถั่ว","น้ำ"],"DislikedFood":["แป้ง","ข้าว"]}
