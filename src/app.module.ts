@@ -12,6 +12,7 @@ import { CategoryofmenuModule } from './modules/categoryofmenu.module';
 import { RandomstatisticsModule } from './modules/randomstatistics.module';
 import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { FavoriteCategoryMenuOfUserModule } from './modules/favorite-category-menu-of-user.module';
 
 
 
@@ -29,7 +30,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     entities: ['dist/entities/*.js'],
     synchronize: false,
   }), ScheduleModule.forRoot(),
-  UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
+  UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -46,7 +47,7 @@ export class AppModule {}
 //     entities: ['dist/entities/*.js'],
 //     synchronize: false,
 //   }), ScheduleModule.forRoot(),
-//   UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
+//   UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
 //   controllers: [AppController],
 //   providers: [AppService],
 // })

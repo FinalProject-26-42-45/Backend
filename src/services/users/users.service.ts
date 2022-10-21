@@ -52,8 +52,12 @@ export class UsersService {
   }
 
   async createUser(userDto: CreateUserDto): Promise<UserDto> {
-    const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId = 2 } = userDto;
+    
+    let { Username, Password, Firstname, Lastname, DOB, Religion, FoodAllergens,
+      DislikedFood, RoleId = 2} = userDto;
+
+      FoodAllergens = FoodAllergens.toString()
+      DislikedFood = DislikedFood.toString()
 
     // check if the user exists in the DB
     const userDB = await this.userRepository.findOne({ where: { Username } });
@@ -61,8 +65,8 @@ export class UsersService {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
     } else {
       const user: Users = await this.userRepository.create({
-        Username, Password, Firstname, Lastname, DOB, Gender, Email,
-        Tel, FoodAllergens, Religion, RoleId
+        Username, Password, Firstname, Lastname, DOB, Religion, FoodAllergens,
+        DislikedFood, RoleId
       });
       await this.userRepository.save(user);
       return toUserDto(user);
@@ -70,8 +74,8 @@ export class UsersService {
   }
 
   async createAdmin(userDto: CreateUserDto): Promise<UserDto> {
-    const { Username, Password, Firstname, Lastname, DOB, Gender, Email,
-      Tel, FoodAllergens, Religion, RoleId = 1 } = userDto;
+    const { Username, Password, Firstname, Lastname, DOB, Religion, FoodAllergens,
+      DislikedFood, RoleId = 1 } = userDto;
 
     // check if the user exists in the DB
     const userDB = await this.userRepository.findOne({ where: { Username } });
@@ -79,8 +83,8 @@ export class UsersService {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
     } else {
       const user: Users = await this.userRepository.create({
-        Username, Password, Firstname, Lastname, DOB, Gender, Email,
-        Tel, FoodAllergens, Religion, RoleId
+        Username, Password, Firstname, Lastname, DOB, Religion, FoodAllergens,
+      DislikedFood, RoleId
       });
       await this.userRepository.save(user);
       return toUserDto(user);
@@ -97,10 +101,9 @@ export class UsersService {
       UserId: result[0].UserId,
       Firstname: data.Firstname,
       Lastname: data.Lastname,
-      Gender: data.Gender,
-      Tel: data.Tel,
       FoodAllergens: data.FoodAllergens,
       Religion: data.Religion,
+      DislikedFood: data.DislikedFood
     }
     this.userRepository.save(newdata)
   }

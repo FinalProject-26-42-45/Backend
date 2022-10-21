@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsArray, IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateUserDto {
 
@@ -7,12 +7,23 @@ export class CreateUserDto {
      @IsNotEmpty() Username: string;
      @IsNotEmpty() Password: string;
      @IsNotEmpty() DOB: Date;
-     @IsNotEmpty() Gender: string;
-     @IsNotEmpty() @IsEmail() Email: string;
-     @IsNotEmpty() Tel: string;
-     @IsNotEmpty() FoodAllergens: string;
      @IsNotEmpty() Religion: string;
-     // @IsNotEmpty() 
+
+     @IsNotEmpty() 
+     @IsArray()
+     @IsString({each:true})
+     FoodAllergens: any;
+
+     @IsNotEmpty() 
+     @IsArray()
+     @IsString({each:true})
+     @IsNotEmpty() FavoriteMenuCategory: any;
+
+     @IsNotEmpty() 
+     @IsArray()
+     @IsString({each:true})
+     @IsNotEmpty() DislikedFood: any;
+      
      RoleId: number;
 
 }

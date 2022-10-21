@@ -3,6 +3,7 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { MenuService } from '../../services/menu/menu.service';
 import { upload } from 'src/services/common/common.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { getMenubyCategoryIdListDto } from 'src/dto/menu/create-menu.dto';
 
 
 
@@ -23,6 +24,7 @@ export class MenuController {
     return this.menuService.getImage(req.MenuId)
   }
 
+
   @Get("category/:CategoryId")
   async getMenu(@Param() req: any) {
     console.log(req);
@@ -34,10 +36,18 @@ export class MenuController {
     return this.menuService.getIngredientsbyMenu(req.MenuId)
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get("categorylist")
+  async getCategotyList(@Body() req: getMenubyCategoryIdListDto, @Request() request: any) {
+    return this.menuService.getMenubyCategoryList(req.CategoryIdList, request.user.UserId)
+  }
+
   @Get(":MenuId")
   async findOne(@Param() MenuId: number) {
     return await this.menuService.findOne(MenuId)
   }
+
+
 
   @UseGuards(JwtAuthGuard)
   @Post()

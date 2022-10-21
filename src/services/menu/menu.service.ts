@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Menu } from '../../entities/menu.entity';
 import * as fs from 'fs'
 import { CategoryofmenuService } from 'src/services/categoryofmenu/categoryofmenu.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class MenuService {
@@ -16,36 +17,41 @@ export class MenuService {
   @Inject()
   cateservice: CategoryofmenuService
 
+  @Inject()
+  userservice: UsersService
+
+
+
   async addMenu() {
     const imgName = getImgName()
-    
-    const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8')) 
+
+    const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
     data.MenuImg = imgName
     //console.log(data);
 
-    const mname = await this.menuRepository.findOne({ where: { MenuName: data.MenuName }});
-    if (mname){
+    const mname = await this.menuRepository.findOne({ where: { MenuName: data.MenuName } });
+    if (mname) {
       throw new HttpException('Menuname already exist!', HttpStatus.CONFLICT)
     } else {
-    const menuObj = {
-      MenuName: data.MenuName,
-      MenuImg: data.MenuImg,
-      Calories: data.Calories,
-      Preparation: data.Preparation,
-      Ingredients: data.Ingredients
-    }
-    await this.menuRepository.save(menuObj)
-  
+      const menuObj = {
+        MenuName: data.MenuName,
+        MenuImg: data.MenuImg,
+        Calories: data.Calories,
+        Preparation: data.Preparation,
+        Ingredients: data.Ingredients
+      }
+      await this.menuRepository.save(menuObj)
 
-    const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
 
-    const catemenu:any = {
-      MenuId: lid[0].MenuId,
-      Category: data.menucategory
+      const lid = await this.menuRepository.query('select*from Menu ORDER BY MenuId DESC LIMIT 1')
+
+      const catemenu: any = {
+        MenuId: lid[0].MenuId,
+        Category: data.menucategory
+      }
+
+      this.cateservice.create(catemenu)
     }
-    
-    this.cateservice.create(catemenu)
-  }
   }
 
   findAll(): Promise<Menu[]> {
@@ -58,9 +64,9 @@ export class MenuService {
 
   async editMenu() {
     const data = JSON.parse(fs.readFileSync(`./public/files/data.json`, 'utf-8'))
-    const result = await this.menuRepository.find({where: {MenuId: data.MenuId }})
+    const result = await this.menuRepository.find({ where: { MenuId: data.MenuId } })
     console.log(result);
-    
+
     const newdata = {
       MenuId: result[0].MenuId,
       MenuName: data.MenuName,
@@ -73,28 +79,67 @@ export class MenuService {
   }
 
 
-  async remove(MenuId: number){
+  async remove(MenuId: number) {
     // const img = await this.findImg(MenuId)
     // fs.unlinkSync(`./images/${img}`)
     this.menuRepository.delete(MenuId);
   }
 
-  async findImg(MenuId: number){
-    const result = await this.menuRepository.find({where: {MenuId: MenuId }})
+  async findImg(MenuId: number) {
+    const result = await this.menuRepository.find({ where: { MenuId: MenuId } })
     return result[0].MenuImg
   }
 
-  async getImage(MenuId: number){
+  async getImage(MenuId: number) {
     const image = await this.findImg(MenuId)
     return `localhost:3000/${image}`
   }
 
-  async getMenubyCategory(CategoryId: number){
+  async getMenubyCategory(CategoryId: number) {
     return await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId = ${CategoryId}`)
   }
 
-  async getIngredientsbyMenu(MenuId: number){
+  async getIngredientsbyMenu(MenuId: number) {
     return await this.menuRepository.query(`select * from Menu m join Recipe r on m.MenuId = r.MenuId join Ingredients i on i.IngredientId = r.IngredientId
                                             where m.MenuId = ${MenuId}`)
+  }
+
+  async getMenubyCategoryList(CategoryId: number[], UserId: number) {
+    const user = await this.userservice.findUser(UserId)
+    const aller = user.FoodAllergens.split(",")
+    const dislike = user.DislikedFood.split(",")
+
+    const merge = aller.concat(dislike)
+
+    let menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)
+    if (merge) {
+      merge.filter((el, index, arr) => {
+        for (const each of menu) {
+          if (each.Ingredients.includes(el)) {
+            menu.splice(index, 1)
+          }
+        }
+      })
+    }
+
+    if (user.Religion == 'อิสลาม') {
+      menu = menu.filter((el: any) => !el.Ingredients.includes("หมู"))
+    }
+    return menu
+  }
+
+  async getMenubyCategoryListAnonymous(CategoryId: number[], receive: string[]) {
+    
+    let menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)   
+    if (receive) {
+      receive.filter((el, index, arr) => {
+        for (const each of menu) {
+          if (each.Ingredients.includes(el)) {
+            menu.splice(index, 1)
+          }
+        }
+      })
+    }
+    return menu
   }
 }
