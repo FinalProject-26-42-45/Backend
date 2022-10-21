@@ -106,8 +106,8 @@ export class MenuService {
 
   async getMenubyCategoryList(CategoryId: number[], UserId: number) {
     const user = await this.userservice.findUser(UserId)
-    const aller = user.FoodAllergens.split(",")
-    const dislike = user.DislikedFood.split(",")
+    const aller = user.FoodAllergens
+    const dislike = user.DislikedFood
 
     const merge = aller.concat(dislike)
 

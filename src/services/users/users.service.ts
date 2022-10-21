@@ -21,9 +21,21 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findUser(UserId: number) {
-    return this.userRepository.findOne(UserId);
-  }
+  async findUser(UserId: number) {
+    const user =  await this.userRepository.findOne(UserId)
+    const data = {
+      UserId: user.UserId,
+      Firstname: user.Firstname,
+      Lastname: user.Lastname,
+      Religion: user.Religion,
+      FoodAllergens: user.FoodAllergens.split(","),
+      DislikedFood: user.DislikedFood.split(",")
+    }
+      console.log(data)
+      return data;
+    }
+
+    
 
   async findOne(options?: object): Promise<UserDto> {
     const user = await this.userRepository.findOne(options);
