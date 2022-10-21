@@ -1,1 +1,8 @@
-{"UserId":2,"Firstname":"niraphorn","Lastname":"jongkraijak","Gender":"หญิง","Tel":"1234567889","Religion":"พุทธ","FoodAllergens":"ไข่, นม"}
+{
+    "UserId": 1,
+    "Firstname": "jam",
+    "Lastname": "maha",
+    "Religion": "พุทธ",
+    "FoodAllergens": ["ไข่", "ไก่"],
+    "DislikedFood": ["ขิง","ตะไคร้"]
+}

@@ -14,15 +14,10 @@ export class CreateUserDto {
      @IsString({each:true})
      FoodAllergens: any;
 
-     @IsNotEmpty() 
      @IsArray()
      @IsString({each:true})
-     @IsNotEmpty() FavoriteMenuCategory: any;
-
      @IsNotEmpty() 
-     @IsArray()
-     @IsString({each:true})
-     @IsNotEmpty() DislikedFood: any;
+     DislikedFood: any;
       
      RoleId: number;
 

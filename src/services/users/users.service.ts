@@ -113,9 +113,9 @@ export class UsersService {
       UserId: result[0].UserId,
       Firstname: data.Firstname,
       Lastname: data.Lastname,
-      FoodAllergens: data.FoodAllergens,
+      FoodAllergens: data.FoodAllergens.toString(),
       Religion: data.Religion,
-      DislikedFood: data.DislikedFood
+      DislikedFood: data.DislikedFood.toString()
     }
     this.userRepository.save(newdata)
   }
