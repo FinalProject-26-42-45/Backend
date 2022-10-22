@@ -26,6 +26,6 @@ export class editUserDto {
      Firstname: string
      Lastname: string
      Religion: string
-     FoodAllergens: any
-     DislikedFood: any
+     FoodAllergens: string[]
+     DislikedFood: string[]
 }
