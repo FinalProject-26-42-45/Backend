@@ -115,15 +115,6 @@ export class MenuService {
 
     var menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)
     if (merge) {
-      
-      // merge.filter((el, index) => {
-      //   for (const each of menu) {
-      //     if (each.Ingredients.includes(el)) {
- 
-      //       menu.splice(index, 1)
-      //     }
-      //   }
-      // })
       menu = menu.filter(each => !merge.filter(el => each.Ingredients.includes(el)).length)
     }
     
