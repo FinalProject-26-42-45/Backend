@@ -44,7 +44,10 @@ export class MenuController {
 
   @Post("categorylist/anonymous")
   async getCategotyListAnonymous(@Body() req: getMenubyCategoryIdListAnonymousDto) {
+    console.log(req);
+    
     return this.menuService.getMenubyCategoryListAnonymous(req.CategoryIdList, req.receive)
+    
   }
 
   @Get(":MenuId")

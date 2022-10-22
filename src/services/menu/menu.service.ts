@@ -116,14 +116,15 @@ export class MenuService {
     var menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)
     if (merge) {
       
-      merge.filter((el, index) => {
-        for (const each of menu) {
-          if (each.Ingredients.includes(el)) {
+      // merge.filter((el, index) => {
+      //   for (const each of menu) {
+      //     if (each.Ingredients.includes(el)) {
  
-            menu.splice(index, 1)
-          }
-        }
-      })
+      //       menu.splice(index, 1)
+      //     }
+      //   }
+      // })
+      menu = menu.filter(each => !merge.filter(el => each.Ingredients.includes(el)).length)
     }
     
     if (user.Religion == 'อิสลาม') {
@@ -133,16 +134,9 @@ export class MenuService {
   }
 
   async getMenubyCategoryListAnonymous(CategoryId: number[], receive: string[]) {
-    
     let menu = await this.menuRepository.query(`select * from Menu m join CategoryOfMenu c on m.MenuId = c.MenuId where CategoryId in (${CategoryId})`)   
     if (receive) {
-      receive.filter((el, index, arr) => {
-        for (const each of menu) {
-          if (each.Ingredients.includes(el)) {
-            menu.splice(index, 1)
-          }
-        }
-      })
+      menu = menu.filter(each => !receive.filter(el => each.Ingredients.includes(el)).length)
     }
     return menu
   }
