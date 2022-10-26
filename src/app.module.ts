@@ -19,30 +19,13 @@ import { FavoriteCategoryMenuOfUserModule } from './modules/favorite-category-me
 
 
 
-@Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'db_foodrand',
-    entities: ['dist/entities/*.js'],
-    synchronize: false,
-  }), ScheduleModule.forRoot(),
-  UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
-
 // @Module({
 //   imports: [TypeOrmModule.forRoot({
 //     type: 'mysql',
-//     host: 'database',
+//     host: 'localhost',
 //     port: 3306,
-//     username: 'backendfoodrand',
-//     password: 'foodrandproject',
+//     username: 'root',
+//     password: '',
 //     database: 'db_foodrand',
 //     entities: ['dist/entities/*.js'],
 //     synchronize: false,
@@ -52,3 +35,20 @@ export class AppModule {}
 //   providers: [AppService],
 // })
 // export class AppModule {}
+
+@Module({
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'database',
+    port: 3306,
+    username: 'backendfoodrand',
+    password: 'foodrandproject',
+    database: 'db_foodrand',
+    entities: ['dist/entities/*.js'],
+    synchronize: false,
+  }), ScheduleModule.forRoot(),
+  UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
