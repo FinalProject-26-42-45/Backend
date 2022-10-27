@@ -1,16 +1,1 @@
-{
-     "MenuName": "som tm",
-     "MenuImg": "gen.jpg",
-     "Calories": "300.00",
-     "Preparation": "1. ต้มน้ำซุปกระดูกหมูให้ร้อน",
-     "Ingredients": "suan pra kob",
-     "menucategory": [
-      {
-        "CategoryId": 1,
-        "CategoryName": "อาหารไทย"
-      },
-	{
-        "CategoryId": 2,
-        "CategoryName": "อาหารอีสาน"	 
-	}]
-}
+{"UserId":null,"Firstname":"aa","Lastname":"aa","Religion":"พุทธ","FoodAllergens":["ไข่","ถั่ว","น้ำ"],"DislikedFood":["แป้ง","ข้าว"]}

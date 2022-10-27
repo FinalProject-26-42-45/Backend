@@ -3,17 +3,17 @@ import { Menu } from "./menu.entity";
 
 
 @Entity('RandomStatistics')
-export class Randomstatistic {
+export class Randomstatistics {
 
     @PrimaryGeneratedColumn()
     RandomId: number;
 
     @Column()
-    MenuId: number;
-    @ManyToOne(()=> Menu, (menu) => menu.randomstatistic, {eager: true})
-    @JoinColumn({name:"MenuId"})
-    menu: Menu;
+    RandomCount: number;
 
     @Column()
-    HistoryId: number;
+    MenuId: number;
+    @ManyToOne(()=> Menu, (menu) => menu.randomstatistics, {eager: true})
+    @JoinColumn({name:"MenuId"})
+    menu: Menu;
 }

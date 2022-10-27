@@ -11,6 +11,9 @@ import { CommonMudule } from './modules/common.module';
 import { CategoryofmenuModule } from './modules/categoryofmenu.module';
 import { RandomstatisticsModule } from './modules/randomstatistics.module';
 import { AuthModule } from './auth/auth.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { FavoriteCategoryMenuOfUserModule } from './modules/favorite-category-menu-of-user.module';
+
 
 
 
@@ -26,7 +29,8 @@ import { AuthModule } from './auth/auth.module';
 //     database: 'db_foodrand',
 //     entities: ['dist/entities/*.js'],
 //     synchronize: false,
-//   }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
+//   }), ScheduleModule.forRoot(),
+//   UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
 //   controllers: [AppController],
 //   providers: [AppService],
 // })
@@ -42,7 +46,8 @@ import { AuthModule } from './auth/auth.module';
     database: 'db_foodrand',
     entities: ['dist/entities/*.js'],
     synchronize: false,
-  }), UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule],
+  }), ScheduleModule.forRoot(),
+  UsersModule, MenuModule, MenucategoryModule, RolesModule, MenuhistoryModule, CommonMudule, CategoryofmenuModule, RandomstatisticsModule, AuthModule, FavoriteCategoryMenuOfUserModule],
   controllers: [AppController],
   providers: [AppService],
 })

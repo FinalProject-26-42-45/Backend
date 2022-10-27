@@ -22,12 +22,5 @@ export class Categoryofmenu {
 
 
 
-    // @OneToMany(()=> Menu, (menu) => menu.categoryofmenu)
-    // menu: Menu[];
-
-    // @OneToMany(()=> Menucategory, (menucategory) => menucategory.categoryofmenu)
-    // menucategory: Menucategory[]
-
-
 
 }

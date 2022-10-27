@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateMenuhistoryDto } from '../../dto/menuhistory/create-menuhistory.dto';
-import { UpdateMenuhistoryDto } from '../../dto/menuhistory/update-menuhistory.dto';
 import { Menuhistory } from '../../entities/menuhistory.entity';
 
 @Injectable()
@@ -12,8 +10,31 @@ export class MenuhistoryService {
     private menuhistoryRepository: Repository<Menuhistory>,
   ) { }
 
+  findAll(): Promise<Menuhistory[]> {
+    return this.menuhistoryRepository.find();
+  }
+
+  findHistory(UserId: number) {
+    return this.menuhistoryRepository.find({where: {UserId: UserId }})
+  }
+
   async addHistory(UserId: number, MenuName: string){
-    this.menuhistoryRepository.save({UserId: UserId, MenuName: MenuName})
+    const find = await this.menuhistoryRepository.findOne({ where: { UserId: UserId, MenuName: MenuName}});
+    if (find) {
+      find.HistoryCount += 1
+      await this.menuhistoryRepository.update(find.HistoryId, find)
+    } else {
+      const add: any = {
+        UserId: UserId,
+        MenuName: MenuName,
+        HistoryCount: 1
+      }
+      await this.menuhistoryRepository.save(add)
+    }
+  }
+
+  async deleteHistory(HistoryId: number){
+    this.menuhistoryRepository.delete(HistoryId)
   }
 
 }

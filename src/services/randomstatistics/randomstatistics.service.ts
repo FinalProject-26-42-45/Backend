@@ -1,26 +1,53 @@
-import { Injectable } from '@nestjs/common';
-import { CreateRandomstatisticDto } from '../../dto/randomstatistics/create-randomstatistic.dto';
-import { UpdateRandomstatisticDto } from '../../dto/randomstatistics/update-randomstatistic.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Randomstatistics } from 'src/entities/randomstatistics.entity';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class RandomstatisticsService {
-  create(createRandomstatisticDto: CreateRandomstatisticDto) {
-    return 'This action adds a new randomstatistic';
-  }
+    constructor(
+        @InjectRepository(Randomstatistics) 
+        private randomRepository: Repository<Randomstatistics>,
+        private schedulerRegistry: SchedulerRegistry) { }
+    
+      @Cron(CronExpression.EVERY_WEEK, { 
+          name: 'history',
+          timeZone: 'Asia/Bangkok' })
 
-  findAll() {
-    return `This action returns all randomstatistics`;
-  }
+      handleMyCron(){
+          this.schedulerRegistry.getCronJob('history');
+          this.randomRepository.query('Delete from RandomStatistics')
+      }
 
-  findOne(id: number) {
-    return `This action returns a #${id} randomstatistic`;
-  }
+      async showStat() {
+        const show = await this.randomRepository.find({ order: {RandomCount: 'DESC'}})
+        const result = []
+        for (let each of show) {
+          const data = {
+            RandomId: each.RandomId,
+            MenuId: each.menu.MenuId,
+            MenuName: each.menu.MenuName,
+            MenuImg: each.menu.MenuImg,
+            RandomCount: each.RandomCount
+          }
+          result.push(data)
+        }
+        return result
+      }
 
-  update(id: number, updateRandomstatisticDto: UpdateRandomstatisticDto) {
-    return `This action updates a #${id} randomstatistic`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} randomstatistic`;
-  }
+      async addStat(MenuId: number){
+        const search = await this.randomRepository.findOne({ where: { MenuId: MenuId}});
+        if (search) {
+          search.RandomCount += 1
+          await this.randomRepository.update(MenuId, search)
+        } else {
+          const add: any = {
+            MenuId: MenuId,
+            RandomCount: 1
+          }
+          await this.randomRepository.save(add)
+        }
+    }
 }
