@@ -23,7 +23,4 @@ export class CategoryofmenuService {
 
   }
 
-  // findMenuId(CateId: number){
-  //   this.Repository.find({ where: {CategoryId: CateId}})
-  // }
 }

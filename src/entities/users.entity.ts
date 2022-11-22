@@ -2,7 +2,7 @@ import { Menuhistory } from "src/entities/menuhistory.entity";
 import { Roles } from "src/entities/role.entity";
 import { BaseEntity, BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
-import { FavoriteCategoryMenuOfUser } from "./favorite-category-menu-of-user.entity";
+
 
 @Entity('Users')
 export class Users extends BaseEntity{
@@ -41,9 +41,6 @@ export class Users extends BaseEntity{
 
     @OneToMany(()=> Menuhistory, menuhistory => menuhistory.users)
     menuhistory: Menuhistory[];
-
-    @OneToMany(()=> FavoriteCategoryMenuOfUser, favoriteCategoryMenuOfUser => favoriteCategoryMenuOfUser.users)
-    favoriteCategoryMenuOfUser: FavoriteCategoryMenuOfUser[];
 
     @BeforeInsert() async hashPassword(){
         this.Password = await bcrypt.hash(this.Password, await bcrypt.genSalt(10));

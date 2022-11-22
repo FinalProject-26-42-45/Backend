@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe())
   app.enableCors({
-    origin: ['http://localhost:8080', 'https://foodrand.hopto.org'],
+    origin: ['http://localhost:8080', 'foodrand-sitproject.servepics.com'],
     methods: ['POST', 'PUT', 'GET', 'DELETE']
   })
   app.use('/images', express.static(join(__dirname, '..', 'images')));
